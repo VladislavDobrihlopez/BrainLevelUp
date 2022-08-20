@@ -71,7 +71,7 @@ class ChooseDifficultyLevelFragment : Fragment() {
     private fun launchGameplayFragment(difficultyLevel: DifficultyLevel) {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerMain, GameplayFragment.newInstance(difficultyLevel))
-            .addToBackStack(NAME)
+            .addToBackStack(GameplayFragment.NAME)
             .commit()
     }
 

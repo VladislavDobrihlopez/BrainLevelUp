@@ -59,7 +59,7 @@ class WelcomeFragment : Fragment() {
     private fun launchChooseDifficultyLevelFragment() {
         requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainerMain, ChooseDifficultyLevelFragment.newInstance())
-            .addToBackStack(null)
+            .addToBackStack(ChooseDifficultyLevelFragment.NAME)
             .commit()
     }
 

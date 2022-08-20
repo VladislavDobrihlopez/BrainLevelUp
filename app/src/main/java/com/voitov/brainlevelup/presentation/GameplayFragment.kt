@@ -33,7 +33,7 @@ class GameplayFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewBinding.textViewSum.setOnClickListener{
+        viewBinding.textViewSum.setOnClickListener {
             launchGameResultsFragment()
         }
     }
@@ -50,9 +50,15 @@ class GameplayFragment : Fragment() {
 
     private fun launchGameResultsFragment() {
         requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerMain, GameResultsFragment.newInstance(GameResult(true, 3,4,
-                GameplaySettings(1,2,3,4))))
-            .addToBackStack(NAME)
+            .replace(
+                R.id.fragmentContainerMain, GameResultsFragment.newInstance(
+                    GameResult(
+                        true, 3, 4,
+                        GameplaySettings(1, 2, 3, 4)
+                    )
+                )
+            )
+            .addToBackStack(GameResultsFragment.NAME)
             .commit()
     }
 
