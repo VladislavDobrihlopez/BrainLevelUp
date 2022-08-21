@@ -44,8 +44,9 @@ class GameplayFragment : Fragment() {
     }
 
     private fun parseArguments() {
-        val args = requireArguments()
-        difficultyLevel = args.getSerializable(KEY_DIFFICULTY) as DifficultyLevel
+        requireArguments().getParcelable<DifficultyLevel>(KEY_DIFFICULTY)?.let {
+            difficultyLevel = it
+        }
     }
 
     private fun launchGameResultsFragment() {
@@ -69,7 +70,7 @@ class GameplayFragment : Fragment() {
             val gameplayFragment = GameplayFragment()
             return gameplayFragment.apply {
                 arguments = Bundle().apply {
-                    putSerializable(KEY_DIFFICULTY, difficultyLevel)
+                    putParcelable(KEY_DIFFICULTY, difficultyLevel)
                 }
             }
         }

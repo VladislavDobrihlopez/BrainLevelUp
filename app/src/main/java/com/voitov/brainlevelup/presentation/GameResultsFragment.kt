@@ -57,8 +57,9 @@ class GameResultsFragment : Fragment() {
     }
 
     private fun parseArguments() {
-        val args = requireArguments()
-        gameResult = args.get(KEY_RESULTS) as GameResult
+        requireArguments().getParcelable<GameResult>(KEY_RESULTS)?.let {
+            gameResult = it
+        }
     }
 
     companion object {
@@ -67,7 +68,7 @@ class GameResultsFragment : Fragment() {
         fun newInstance(gameResult: GameResult): GameResultsFragment {
             return GameResultsFragment().apply {
                 arguments = Bundle().apply {
-                    putSerializable(KEY_RESULTS, gameResult)
+                    putParcelable(KEY_RESULTS, gameResult)
                 }
             }
         }
