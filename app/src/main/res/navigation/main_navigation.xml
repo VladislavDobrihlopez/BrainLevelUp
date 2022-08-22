@@ -32,10 +32,17 @@
             app:destination="@id/gameResultsFragment"
             app:popUpTo="@id/gameplayFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="difficultyLevel"
+            app:argType="com.voitov.brainlevelup.domain.entities.DifficultyLevel" />
     </fragment>
     <fragment
         android:id="@+id/gameResultsFragment"
         android:name="com.voitov.brainlevelup.presentation.GameResultsFragment"
         android:label="fragment_game_results"
-        tools:layout="@layout/fragment_game_results" />
+        tools:layout="@layout/fragment_game_results" >
+        <argument
+            android:name="gameResult"
+            app:argType="com.voitov.brainlevelup.domain.entities.GameResult" />
+    </fragment>
 </navigation>

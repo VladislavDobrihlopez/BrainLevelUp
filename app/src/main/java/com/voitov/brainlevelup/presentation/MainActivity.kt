@@ -1,7 +1,7 @@
 package com.voitov.brainlevelup.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.voitov.brainlevelup.R
 
 class MainActivity : AppCompatActivity() {
