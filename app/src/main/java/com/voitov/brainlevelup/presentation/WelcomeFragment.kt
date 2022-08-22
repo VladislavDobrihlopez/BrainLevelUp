@@ -1,11 +1,11 @@
 package com.voitov.brainlevelup.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.voitov.brainlevelup.R
 import com.voitov.brainlevelup.databinding.FragmentWelcomeBinding
 
@@ -24,46 +24,17 @@ class WelcomeFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d(TAG, "onCreateView")
         viewBinding.buttonUnderstand.setOnClickListener {
             launchChooseDifficultyLevelFragment()
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.d(TAG, "onStart")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.d(TAG, "onResume")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.d(TAG, "onPause")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d(TAG, "onStop")
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _viewBinding = null
-        Log.d(TAG, "onDestroyView")
     }
 
     private fun launchChooseDifficultyLevelFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerMain, ChooseDifficultyLevelFragment.newInstance())
-            .addToBackStack(ChooseDifficultyLevelFragment.NAME)
-            .commit()
-    }
-
-    companion object {
-        private const val TAG = "WelcomeFragment"
+        findNavController().navigate(R.id.action_welcomeFragment_to_chooseDifficultyLevelFragment)
     }
 }
