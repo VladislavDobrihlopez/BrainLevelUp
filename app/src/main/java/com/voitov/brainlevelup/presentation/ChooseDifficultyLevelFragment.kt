@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.voitov.brainlevelup.R
 import com.voitov.brainlevelup.databinding.FragmentChooseDifficultyLevelBinding
 import com.voitov.brainlevelup.domain.entities.DifficultyLevel
@@ -69,10 +70,18 @@ class ChooseDifficultyLevelFragment : Fragment() {
     }
 
     private fun launchGameplayFragment(difficultyLevel: DifficultyLevel) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerMain, GameplayFragment.newInstance(difficultyLevel))
-            .addToBackStack(GameplayFragment.NAME)
-            .commit()
+        val args = Bundle().apply {
+            putParcelable(GameplayFragment.KEY_DIFFICULTY, difficultyLevel)
+        }
+
+        findNavController().navigate(
+            R.id.action_chooseDifficultyLevelFragment_to_gameplayFragment,
+            args
+        )
+//        requireActivity().supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragmentContainerMain, GameplayFragment.newInstance(difficultyLevel))
+//            .addToBackStack(GameplayFragment.NAME)
+//            .commit()
     }
 
     companion object {

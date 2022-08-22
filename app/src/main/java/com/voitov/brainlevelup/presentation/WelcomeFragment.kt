@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.voitov.brainlevelup.R
 import com.voitov.brainlevelup.databinding.FragmentWelcomeBinding
 
@@ -57,10 +58,11 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun launchChooseDifficultyLevelFragment() {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainerMain, ChooseDifficultyLevelFragment.newInstance())
-            .addToBackStack(ChooseDifficultyLevelFragment.NAME)
-            .commit()
+        findNavController().navigate(R.id.action_welcomeFragment_to_chooseDifficultyLevelFragment)
+//        requireActivity().supportFragmentManager.beginTransaction()
+//            .replace(R.id.fragmentContainerMain, ChooseDifficultyLevelFragment.newInstance())
+//            .addToBackStack(ChooseDifficultyLevelFragment.NAME)
+//            .commit()
     }
 
     companion object {

@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.voitov.brainlevelup.R
 import com.voitov.brainlevelup.databinding.FragmentGameplayBinding
 import com.voitov.brainlevelup.domain.entities.DifficultyLevel
@@ -125,17 +126,21 @@ class GameplayFragment : Fragment() {
     }
 
     private fun launchGameResultsFragment(gameResult: GameResult) {
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(
-                R.id.fragmentContainerMain, GameResultsFragment.newInstance(gameResult)
-            )
-            .addToBackStack(GameResultsFragment.NAME)
-            .commit()
+        val args = Bundle().apply {
+            putParcelable(GameResultsFragment.KEY_RESULTS, gameResult)
+        }
+        findNavController().navigate(R.id.action_gameplayFragment_to_gameResultsFragment, args)
+//        requireActivity().supportFragmentManager.beginTransaction()
+//            .replace(
+//                R.id.fragmentContainerMain, GameResultsFragment.newInstance(gameResult)
+//            )
+//            .addToBackStack(GameResultsFragment.NAME)
+//            .commit()
     }
 
     companion object {
         const val NAME = "GameplayFragment"
-        private const val KEY_DIFFICULTY = "KEY_DIFFICULTY"
+        const val KEY_DIFFICULTY = "KEY_DIFFICULTY"
         fun newInstance(difficultyLevel: DifficultyLevel): GameplayFragment {
             val gameplayFragment = GameplayFragment()
             return gameplayFragment.apply {

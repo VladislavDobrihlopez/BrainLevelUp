@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE
+import androidx.navigation.fragment.findNavController
 import com.voitov.brainlevelup.R
 import com.voitov.brainlevelup.databinding.FragmentGameResultsBinding
 import com.voitov.brainlevelup.domain.entities.GameResult
@@ -47,13 +48,13 @@ class GameResultsFragment : Fragment() {
             retryGame()
         }
 
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    retryGame()
-                }
-            })
+//        requireActivity().onBackPressedDispatcher.addCallback(
+//            viewLifecycleOwner,
+//            object : OnBackPressedCallback(true) {
+//                override fun handleOnBackPressed() {
+//                    retryGame()
+//                }
+//            })
     }
 
     private fun bindViews() {
@@ -96,10 +97,7 @@ class GameResultsFragment : Fragment() {
         }
 
     private fun retryGame() {
-        requireActivity().supportFragmentManager.popBackStack(
-            GameplayFragment.NAME,
-            POP_BACK_STACK_INCLUSIVE
-        )
+        findNavController().popBackStack()
     }
 
     private fun parseArguments() {
@@ -110,7 +108,7 @@ class GameResultsFragment : Fragment() {
 
     companion object {
         const val NAME = "GameResultsFragment"
-        private const val KEY_RESULTS = "Results"
+        const val KEY_RESULTS = "Results"
         fun newInstance(gameResult: GameResult): GameResultsFragment {
             return GameResultsFragment().apply {
                 arguments = Bundle().apply {
