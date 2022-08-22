@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="flirt">#A4036F</color>
+    <color name="blue_munsell">#048BA8</color>
+    <color name="medium_aquamarine">#16DB93</color>
+    <color name="android_green">#B6C649</color>
+    <color name="sandy_brown">#F29E4C</color>
+    <color name="blue_bell">#A491D3</color>
+    <color name="ming">#38686A</color>
 </resources>
