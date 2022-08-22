@@ -1,10 +1,12 @@
 package com.voitov.brainlevelup.presentation.viewmodels
 
 import android.app.Application
+import android.content.Context
 import android.os.CountDownTimer
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.voitov.brainlevelup.R
 import com.voitov.brainlevelup.data.GameRepositoryImpl
 import com.voitov.brainlevelup.domain.entities.DifficultyLevel
@@ -15,14 +17,15 @@ import com.voitov.brainlevelup.domain.usecases.GenerateQuestionUseCase
 import com.voitov.brainlevelup.domain.usecases.GetGameplaySettingUseCase
 import java.util.*
 
-class GameplayViewModel(application: Application) : AndroidViewModel(application) {
-    private val context = application
+class GameplayViewModel(
+    private val application: Application,
+    private val difficultyLevel: DifficultyLevel
+) : ViewModel() {
     private val gameRepository = GameRepositoryImpl
     private val generateQuestionUseCase = GenerateQuestionUseCase(gameRepository)
     private val getGameplaySettingUseCase = GetGameplaySettingUseCase(gameRepository)
 
     private lateinit var gameplaySettings: GameplaySettings
-    private lateinit var difficultyLevel: DifficultyLevel
 
     private val _formattedTime = MutableLiveData<String>()
     val formattedTime: LiveData<String>
@@ -72,8 +75,13 @@ class GameplayViewModel(application: Application) : AndroidViewModel(application
             generateQuestionUseCase(gameplaySettings.maxAvailableSumValue)
     }
 
-    fun startGame(difficultyLevel: DifficultyLevel) {
-        applySettings(difficultyLevel)
+
+    init {
+        startGame()
+    }
+
+    private fun startGame() {
+        applySettings()
         startTimer()
         loadQuestion()
         updateViewsValues()
@@ -85,8 +93,7 @@ class GameplayViewModel(application: Application) : AndroidViewModel(application
         loadQuestion()
     }
 
-    private fun applySettings(difficultyLevel: DifficultyLevel) {
-        this.difficultyLevel = difficultyLevel
+    private fun applySettings() {
         gameplaySettings = getGameplaySettingUseCase(difficultyLevel)
         _minPercentageToWin.value = gameplaySettings.minPercentageOfCorrectAnswersToWin
     }
@@ -143,7 +150,7 @@ class GameplayViewModel(application: Application) : AndroidViewModel(application
         _percentageOfCorrectAnswers.value = currentPercentage
 
         _progressAnswers.value = String.format(
-            context.resources.getString(R.string.progress_answers),
+            application.resources.getString(R.string.progress_answers),
             countOfCorrectAnswers,
             gameplaySettings.minCountOfCorrectAnswersToWin
         )

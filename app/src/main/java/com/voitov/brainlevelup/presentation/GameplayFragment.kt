@@ -33,11 +33,12 @@ class GameplayFragment : Fragment() {
         )
     }
 
+    private val viewModelFactory: GameViewModelFactory by lazy {
+        GameViewModelFactory(difficultyLevel, requireActivity().application)
+    }
+
     private val viewModel: GameplayViewModel by lazy {
-        ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application)
-        ).get(GameplayViewModel::class.java)
+        ViewModelProvider(this, viewModelFactory).get(GameplayViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +60,6 @@ class GameplayFragment : Fragment() {
 
         setupViewModelObservers()
         setupClickListeners()
-        viewModel.startGame(difficultyLevel)
     }
 
     override fun onDestroyView() {
