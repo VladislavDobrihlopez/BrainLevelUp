@@ -15,14 +15,21 @@ object GameRepositoryImpl : GameRepository {
 
     override fun generateQuestion(maxAvailableSum: Int, countOfAnswersToGenerate: Int): Question {
         val sum = Random.nextInt(MIN_AVAILABLE_SUM, maxAvailableSum + 1)
-        val visibleAdditive = Random.nextInt(MIN_POSSIBLE_ADDITIVE, maxAvailableSum)
+        val visibleAdditive = Random.nextInt(MIN_POSSIBLE_ADDITIVE, sum)
 
         val correctAnswer = sum - visibleAdditive
-        val start = max(correctAnswer - countOfAnswersToGenerate * 2, MIN_POSSIBLE_ADDITIVE)
-        val end = min(correctAnswer + countOfAnswersToGenerate * 2, maxAvailableSum)
+        val start = max(correctAnswer - countOfAnswersToGenerate, MIN_POSSIBLE_ADDITIVE)
+        val end = min(correctAnswer + countOfAnswersToGenerate, maxAvailableSum)
 
         val options = HashSet<Int>()
+
+        var isPut = false
+
         while (options.size < countOfAnswersToGenerate) {
+            if (Random.nextBoolean() && !isPut) {
+                options.add(correctAnswer)
+                isPut = true
+            }
             options.add(Random.nextInt(start, end + 1))
         }
 
