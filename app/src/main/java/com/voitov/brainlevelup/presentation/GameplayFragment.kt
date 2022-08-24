@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.voitov.brainlevelup.databinding.FragmentGameplayBinding
-import com.voitov.brainlevelup.domain.entities.GameResult
+import com.voitov.brainlevelup.domain.entities.GameResults
 import com.voitov.brainlevelup.presentation.viewmodels.GameplayViewModel
 
 class GameplayFragment : Fragment() {
@@ -112,10 +112,10 @@ class GameplayFragment : Fragment() {
         return ContextCompat.getColor(requireContext(), colorResId)
     }
 
-    private fun launchGameResultsFragment(gameResult: GameResult) {
+    private fun launchGameResultsFragment(gameResults: GameResults) {
         findNavController().navigate(
             GameplayFragmentDirections.actionGameplayFragmentToGameResultsFragment(
-                gameResult
+                gameResults
             )
         )
     }
