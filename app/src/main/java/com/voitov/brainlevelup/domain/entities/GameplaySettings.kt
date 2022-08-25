@@ -1,6 +1,7 @@
 package com.voitov.brainlevelup.domain.entities
 
 import android.os.Parcelable
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

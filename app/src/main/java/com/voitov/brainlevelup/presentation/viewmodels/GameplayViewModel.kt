@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.voitov.brainlevelup.R
 import com.voitov.brainlevelup.data.GameRepositoryImpl
 import com.voitov.brainlevelup.domain.entities.DifficultyLevel
-import com.voitov.brainlevelup.domain.entities.GameResult
+import com.voitov.brainlevelup.domain.entities.GameResults
 import com.voitov.brainlevelup.domain.entities.GameplaySettings
 import com.voitov.brainlevelup.domain.entities.Question
 import com.voitov.brainlevelup.domain.usecases.GenerateQuestionUseCase
@@ -64,8 +64,8 @@ class GameplayViewModel(
     val getGameplaySettings: LiveData<GameplaySettings>
         get() = _getGameplaySettings
 
-    private val _gameResults = MutableLiveData<GameResult>()
-    val gameResults: LiveData<GameResult>
+    private val _gameResults = MutableLiveData<GameResults>()
+    val gameResults: LiveData<GameResults>
         get() = _gameResults
 
     private fun loadQuestion() {
@@ -122,7 +122,7 @@ class GameplayViewModel(
 
     private fun onFinishGame() {
         _gameResults.value =
-            GameResult(
+            GameResults(
                 _enoughCorrectAnswersToWin.value == true && _enoughPercentageToWin.value == true,
                 countOfCorrectAnswers,
                 countOfQuestions,
